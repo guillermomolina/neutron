@@ -50,6 +50,7 @@ import neutron.conf.plugins.ml2.drivers.mech_sriov.agent_common
 import neutron.conf.plugins.ml2.drivers.mech_sriov.mech_sriov_conf
 import neutron.conf.plugins.ml2.drivers.openvswitch.mech_ovs_conf
 import neutron.conf.plugins.ml2.drivers.ovs_conf
+import neutron.conf.plugins.ml2.drivers.solaris
 import neutron.conf.quota
 import neutron.conf.service
 import neutron.conf.services.logging
@@ -289,6 +290,21 @@ def list_ovs_opts():
          ),
         ('securitygroup',
          neutron.conf.agent.securitygroups_rpc.security_group_opts),
+        ('network_log',
+         neutron.conf.services.logging.log_driver_opts)
+    ]
+
+
+def list_solaris_opts():
+    return [
+        ('solaris',
+         neutron.conf.plugins.ml2.drivers.solaris.solaris_opts),
+        ('agent',
+         itertools.chain(
+             neutron.conf.plugins.ml2.drivers.agent.agent_opts,
+             neutron.conf.agent.agent_extensions_manager.
+             AGENT_EXT_MANAGER_OPTS)
+         ),
         ('network_log',
          neutron.conf.services.logging.log_driver_opts)
     ]
